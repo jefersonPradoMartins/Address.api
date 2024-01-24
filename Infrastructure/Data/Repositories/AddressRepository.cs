@@ -1,0 +1,75 @@
+﻿using Address.Infrastructure.Data.Context;
+using Address.Infrastructure.Data.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
+
+namespace Address.Infrastructure.Data.Repositories
+{
+    public class AddressRepository : IAddressRepository
+    {
+        private readonly Context.Context _context;
+
+
+        public AddressRepository(Context.Context context)
+        {
+            _context = context;
+        }
+
+        public async Task CreateAsync(Domain.Entities.Address address)
+        {
+            try
+            {
+                await _context.Addresses.AddAsync(address);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        public async Task DeleteAsync(Guid addressId)
+        {
+            try
+            {
+                var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
+
+                if (result != null)
+                {
+                    _context.Addresses.Remove(result);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public async Task<Domain.Entities.Address> GetByIdAsync(Guid addressId)
+        {
+            try
+            {
+                var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task UpdateAsync(Domain.Entities.Address address)
+        {
+            try
+            {
+                _context.Addresses.Update(address);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+    }
+}

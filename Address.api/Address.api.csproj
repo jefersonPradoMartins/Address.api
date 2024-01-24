@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<InvariantGlobalization>true</InvariantGlobalization>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Commands\Handlers\" />
+		<Folder Include="Validators\" />
+		<Folder Include="Services\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Address.Service\Address.Service.csproj" />
+		<ProjectReference Include="..\Domain\Address.Domain.csproj" />
+		<ProjectReference Include="..\Infrastructure\Address.Infrastructure.csproj" />
+	</ItemGroup>
+
+</Project>
