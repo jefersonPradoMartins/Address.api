@@ -15,4 +15,8 @@
 		<ProjectReference Include="..\Infrastructure\Address.Infrastructure.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Dto\Response\" />
+	</ItemGroup>
+
 </Project>

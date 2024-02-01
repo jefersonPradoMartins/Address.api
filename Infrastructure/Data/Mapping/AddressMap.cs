@@ -7,6 +7,7 @@ namespace Address.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Domain.Entities.Address> builder)
         {
+            builder.ToTable("Address");
             builder.Property(x => x.AddressId).ValueGeneratedOnAdd();
             builder.HasKey(x => x.AddressId);
             builder.Property(x => x.Street).HasMaxLength(100);

@@ -1,10 +1,12 @@
 ﻿using Address.Domain.Entities;
 using Address.Service.Repositories.Interface;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Address.api.Controllers
+namespace Address.api.Controllers.v1
 {
-    [Route("api/v1/[controller]")]
+    [ApiVersion(1)]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CustomerController : Controller
     {

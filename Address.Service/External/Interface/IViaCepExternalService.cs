@@ -1,4 +1,6 @@
-﻿namespace Address.Service.External.Interface
+﻿using Address.Infrastructure.ExternalServices.Models;
+
+namespace Address.Service.External.Interface
 {
     public interface IViaCepExternalService
     {

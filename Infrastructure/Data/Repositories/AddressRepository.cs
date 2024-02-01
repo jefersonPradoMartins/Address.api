@@ -1,6 +1,7 @@
 ﻿using Address.Infrastructure.Data.Context;
 using Address.Infrastructure.Data.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Address.Infrastructure.Data.Repositories
 {
@@ -13,63 +14,35 @@ namespace Address.Infrastructure.Data.Repositories
         {
             _context = context;
         }
-
         public async Task CreateAsync(Domain.Entities.Address address)
         {
-            try
-            {
-                await _context.Addresses.AddAsync(address);
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
+            await _context.Addresses.AddAsync(address);
+            _context.SaveChanges();
         }
-
         public async Task DeleteAsync(Guid addressId)
         {
-            try
-            {
-                var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
+            var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
 
-                if (result != null)
-                {
-                    _context.Addresses.Remove(result);
-                    _context.SaveChanges();
-                }
-            }
-            catch (Exception ex)
+            if (result != null)
             {
-
+                _context.Addresses.Remove(result);
+                _context.SaveChanges();
             }
         }
-
+        public async Task<IEnumerable<Domain.Entities.Address>> GetAllAsync()
+        {
+            var result = _context.Addresses.ToList();
+            return result;
+        }
         public async Task<Domain.Entities.Address> GetByIdAsync(Guid addressId)
         {
-            try
-            {
-                var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            var result = await _context.Addresses.AsNoTracking().FirstAsync(x => x.AddressId == addressId);
+            return result;
         }
-
         public async Task UpdateAsync(Domain.Entities.Address address)
         {
-            try
-            {
-                _context.Addresses.Update(address);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-
-            }
+            _context.Addresses.Update(address);
+            await _context.SaveChangesAsync();
         }
     }
 }

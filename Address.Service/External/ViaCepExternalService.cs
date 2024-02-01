@@ -1,4 +1,5 @@
 ﻿using Address.Infrastructure.ExternalServices.Clients.ViaCep;
+using Address.Infrastructure.ExternalServices.Models;
 using Address.Service.External.Interface;
 
 namespace Address.Service.External

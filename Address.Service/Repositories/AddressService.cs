@@ -2,7 +2,6 @@
 using Address.Infrastructure.Data.Repositories.Interface;
 using Address.Service.Repositories.Interface;
 
-
 namespace Address.Service.Repositories
 {
     public class AddressService : IAddressService
@@ -22,6 +21,11 @@ namespace Address.Service.Repositories
         public async Task DeleteAsync(Guid addressId)
         {
             await _addressR.DeleteAsync(addressId);
+        }
+
+        public async Task<IEnumerable<Domain.Entities.Address>> GetAllAsync()
+        {
+            return await _addressR.GetAllAsync();
         }
 
         public async Task<Domain.Entities.Address> GetByIdAsync(Guid addressId)
